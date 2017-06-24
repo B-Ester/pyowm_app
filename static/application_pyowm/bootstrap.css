@@ -1093,6 +1093,7 @@ body {
   line-height: 1.42857143;
   color: #888888;
   background-image: url('http://wallpapercave.com/wp/mJuXDOn.jpg');
+  background-size: cover;
   background-repeat:no-repeat;
   background-attachment:fixed;
   background-position: 100% 100%;
@@ -6967,5 +6968,5 @@ a.list-group-item-danger.active:focus {
   font-size:140%;
   font-family:"Times New Roman",Georgia,Serif;
   color:#ffae11;
-  text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white; /* Параметры тени */
+  text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white;
 }

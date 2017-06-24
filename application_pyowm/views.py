@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from .weather_api import weather_at_any_city, all_locations, time_now
+from .weather_api import weather_at_any_city as ws, all_locations
 from .forms import City
+import ipdb
 
 def index(request):
     return render(request, 'application_pyowm/index.html')
@@ -10,7 +11,11 @@ def city_forecast(request):
         form = City(request.POST)
         if form.is_valid():
             city_name = (str(form.cleaned_data['name_of_city']))
-            return render(request, 'application_pyowm/any_city.html', {'data': weather_at_any_city(city_name)})
+            context = {
+                'data': ws(city_name),
+                'city': city_name
+            }
+            return render(request, 'application_pyowm/any_city.html', context)
         else:
             return HttpResponse('Введите корректное назване города')
     else:
@@ -20,7 +25,10 @@ def city_forecast(request):
 
 
 def barca(request):
-    return render(request, 'application_pyowm/barca.html', {'data': weather_at_any_city(all_locations[5])})
+    return render(request, 'application_pyowm/barca.html', {'data': ws(all_locations[5])})
 
 def sever(request):
-    return render(request, 'application_pyowm/sever.html', {'data' : weather_at_any_city(all_locations[0])})
+    return render(request, 'application_pyowm/sever.html', {'data': ws(all_locations[0])})
+
+def forecast(request, city):
+    return render(request, 'application_pyowm/any_city.html', {'data': ws(str(city))})
