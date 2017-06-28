@@ -67,6 +67,9 @@
               </ul>
             </li>
             <li>
+              <a href="future_fc/">На завтра </a>
+            </li>
+            <li>
               <a href="https://pypi.python.org/pypi/pyowm/2.0.0">О модуле</a>
             </li>
             <li>
@@ -82,5 +85,12 @@
       </div>
     </div>
 <h4 class="greeting">Доброго времени суток!</br> Данный сайт содержит информацию о погоде в любом городе  мира в режиме реального времени.</h4>
+    {% if time.minute < 10 %}
+        <h4 class="date">{{ time.hour }} : 0{{ time.minute }}<br>
+        {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
+    {% else %}
+    <h4 class="date">{{ time.hour }} : {{ time.minute }}<br>
+        {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
+    {% endif %}
 </body>
 </html>

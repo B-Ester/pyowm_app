@@ -6962,7 +6962,7 @@ a.list-group-item-danger.active:focus {
 }
 .greeting {
   margin-left: 900px;
-  margin-top: 85px;
+  margin-top: 105px;
   font-weight:bold;
   font-style:italic;
   font-size:140%;
@@ -6970,3 +6970,83 @@ a.list-group-item-danger.active:focus {
   color:#ffae11;
   text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white;
 }
+.date {
+  margin-top: 400px;
+  padding-left: 1170px;
+  font-family:"tahoma";
+  color: snow;
+}
+.date:hover {
+  color: black;
+}
+.greeting:hover {
+  opacity: 0.6;
+  color: snow;
+}
+.date_c {
+  padding-left: 1170px;
+  font-family:"tahoma";
+  color: snow;
+}
+.date_c:hover {
+  color: #f05800}
+
+.result:hover {
+  margin-top: 50px;
+  margin-left: 50px;
+  font-weight:bold;
+  font-variant:small-caps;
+  color: #422e01;
+  font-size:130%;
+  font-style:oblique;
+  text-shadow: 0.4px 0.4px 0.4px white, 0 0 0.4em white;
+}
+.futurefc {
+  margin-top: 100px;
+}
+
+.tforecast {
+  color: #030303;
+  font-style: oblique ;
+  font-family:"Times New Roman",Georgia,Serif;
+  font-size:130%;
+  line-height: 25px;
+  font-weight:bold;
+}
+#sun {
+  position: absolute ;
+  margin-left: 50px;
+}
+#rain {
+  position: absolute ;
+  margin-left: 350px;
+}
+#clouds {
+  position: absolute ;
+  margin-left: 500px;
+}
+#fog {
+  position: absolute ;
+  margin-left:650px;
+}
+#snow {
+  position: absolute;
+  margin-left:200px;
+}
+#hurry {
+  position: absolute;
+  margin-left:800px;
+}
+#tor {
+  position: absolute;
+  margin-left:950px;
+}
+.date_cm {
+  margin-top: 100px;
+  position: absolute;
+  padding-left: 1170px;
+  font-family:"tahoma";
+  color: snow;
+}
+.date_cm:hover {
+  color: #f05800}
