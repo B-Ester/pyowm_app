@@ -39,8 +39,10 @@ def barca(request):
 def sever(request):
     return render(request, 'application_pyowm/sever.html', {'data': ws(all_locations[0])})
 
+city1 = 'Severodonetsk'
 def forecast(request, city):
-    return render(request, 'application_pyowm/any_city.html', {'data': ws(str(city))})
+    return render(request, 'application_pyowm/any_city.html', {'data': ws(city)})
+
 
 def future_fc(request):
     if request.method == 'POST':
