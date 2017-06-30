@@ -30,13 +30,11 @@
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+ <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a href="/city_forecast/" class="navbar-brand">Погода в городе </a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
         </div>
@@ -45,16 +43,17 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">В Украине <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="{% url 'forecast' city='Severodonetsk' %}">Северодонецк</a></li>
+                <li><a href="{% url 'forecast' city="Severodonetsk" %}">Северодонецк</a></li>
                 <li class="divider"></li>
-                <li><a href="{% url 'forecast' city='Kiev' %}">Киев</a></li>
+                <li><a href="../">Киев</a></li>
                 <li><a href="../">Харьков</a></li>
                 <li><a href="../">Днепр</a></li>
                 <li><a href="../">Львов</a></li>
                 <li><a href="../">Одесса</a></li>
               </ul>
             </li>
-            <li class="dropdown">
+
+              <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">В Европе <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
                 <li><a href="/barca/">Барселона</a></li>
@@ -65,12 +64,8 @@
                 <li><a href="../">Берлин</a></li>
                 <li><a href="../">Лиссабон</a></li>
               </ul>
-            </li>
-            <li>
+             <li>
               <a href="future_fc/">На завтра </a>
-            </li>
-            <li>
-              <a href="coords/">В координатах </a>
             </li>
             <li>
               <a href="https://pypi.python.org/pypi/pyowm/2.0.0">О модуле</a>
@@ -81,18 +76,39 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="//" target="_blank">На главную</a></li>
+            <li><a href="/" target="_blank">На главную</a></li>
           </ul>
 
         </div>
       </div>
     </div>
-<h4 class="greeting">Доброго времени суток!</br> Данный сайт содержит информацию о погоде в любом городе  мира в режиме реального времени.</h4>
+
+<form method="post" action="/coords/" class="btn btn-default navbar-btn" id="forma">
+    {% csrf_token %}
+    {{ form.long }}
+    {{ form.lat }}
+<input type="submit" value="GO" />
+</form>
+<form action="/coords/">
+    <button class="btn btn-default navbar-btn" id="redir" type="submit">Другие координаты </button>
+</form>
+<div class="result">
+       <hr>Погода сейчас: <br>
+            {{type}}
+       <hr>
+       Статус: {{status}}<br>
+       Температура : {{ temp.temp_max }} °C<br>
+       Влажность : {{ humidity }} %<br>
+       Ветер : {{wind.speed }} м/с<br>
+       Давление : {{press.press}}<br>
+       Время рассвета : {{sr}}<br>
+       Время заката : {{sn}}<br>
+</div>
     {% if time.minute < 10 %}
-        <h4 class="date">{{ time.hour }} : 0{{ time.minute }}<br>
+        <h4 class="date_c">{{ time.hour }} : 0{{ time.minute }}<br>
         {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
     {% else %}
-    <h4 class="date">{{ time.hour }} : {{ time.minute }}<br>
+    <h4 class="date_c">{{ time.hour }} : {{ time.minute }}<br>
         {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
     {% endif %}
 </body>

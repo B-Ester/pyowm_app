@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from .weather_api import weather_at_any_city as ws, all_locations
+from .weather_api import weather_at_any_city as ws, all_locations, forecast_snow as fs
 from .weather_api import clock, cords, forecast as fcs, tomorrow_forecast as tf
-from .weather_api import forecast_sun as tfs, forecast_c as fc, forecast_fog as fg, forecast_snow as fs
-from .weather_api import forecast_h as fh,forecast_t  as ft
-from .forms import City
+from .weather_api import forecast_sun as tfs, forecast_c as fc, forecast_fog as fg
+from .weather_api import forecast_h as fh,forecast_t  as ft, weather_at_coords as wac
+from .forms import City, Cords
 #import ipdb
 
 def index(request):
@@ -13,7 +13,7 @@ def city_forecast(request):
     if request.method == 'POST':
         form = City(request.POST)
         if form.is_valid():
-            city_name = (str(form.cleaned_data['name_of_city']))
+            city_name = form.cleaned_data['name_of_city']
             context = {
                 'data': ws(city_name),
                 'city': city_name,
@@ -78,3 +78,36 @@ def future_fc(request):
                     }
     return render(request, 'application_pyowm/future_fc.html', context)
     return HttpResponseRedirect("/future_fc/")
+
+def coords(request):
+    if request.method == 'POST':
+        form_c = Cords(request.POST)
+        if form_c.is_valid():
+            long = form_c.cleaned_data['long']
+            lat = form_c.cleaned_data['lat']
+            res = wac(long, lat).get_weather()
+            context = {
+                'status': res.get_status(),
+                'temp': res.get_temperature('celsius'),
+                'humidity': res.get_humidity(),
+                'wind': res.get_wind(),
+                'press': res.get_pressure(),
+                'sr': res.get_sunrise_time(timeformat='iso')[11:19],
+                'sn': res.get_sunset_time(timeformat='iso')[11:19],
+                'time': clock()
+            }
+            return render(request, 'application_pyowm/coords.html', context)
+        else:
+            return HttpResponse('Введите корректные значения координат')
+    else:
+        form_c = Cords
+        context = {
+            'form': form_c,
+            'time': clock()
+        }
+        return render(request, 'application_pyowm/coords.html', context)
+    return HttpResponseRedirect("/coords/")
+
+
+
+

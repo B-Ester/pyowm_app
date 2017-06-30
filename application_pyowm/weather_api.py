@@ -66,3 +66,7 @@ def forecast_h(located):
 def forecast_t(located):
     fc = owm.daily_forecast(located)
     return fc.will_be_tornado_at(all_time[0]), fc.will_be_tornado_at(all_time[1]), fc.will_be_tornado_at(all_time[2]), fc.will_be_tornado_at(all_time[3])
+
+def weather_at_coords(long, lat):
+    obs = owm.weather_at_coords(long, lat)
+    return obs

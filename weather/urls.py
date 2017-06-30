@@ -8,7 +8,8 @@ urlpatterns = [
     url(r'^sever/', views.sever, name='sever'),
     url(r'^barca/', views.barca, name='barca'),
     url(r'^forecast/(?P<city>[\w])', views.forecast, name='forecast'),
-    url(r'^future_fc', views.future_fc, name='future_fc')
+    url(r'^future_fc', views.future_fc, name='future_fc'),
+    url(r'^coords/', views.coords, name='coords'),
 ]
 
 
