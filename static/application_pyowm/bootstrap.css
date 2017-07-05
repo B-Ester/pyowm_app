@@ -6971,7 +6971,6 @@ a.list-group-item-danger.active:focus {
   text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white;
 }
 .date {
-  margin-top: 400px;
   padding-left: 1170px;
   font-family:"tahoma";
   color: snow;
@@ -7004,7 +7003,6 @@ a.list-group-item-danger.active:focus {
 .futurefc {
   margin-top: 100px;
 }
-
 .tforecast {
   color: #030303;
   font-style: oblique ;
@@ -7042,7 +7040,6 @@ a.list-group-item-danger.active:focus {
   margin-left:950px;
 }
 .date_cm {
-  margin-top: 100px;
   position: absolute;
   padding-left: 1170px;
   font-family:"tahoma";

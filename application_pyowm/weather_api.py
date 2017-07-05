@@ -1,5 +1,4 @@
 import pyowm, json, datetime
-
 owm = pyowm.OWM('aa16d2e6e3a3c13b30140edfb4a81b9c', language='ru')
 
 all_locations = ['Severodonetsk', 'Kiev', 'Kharkov', 'Lvov', 'Odessa', 'Barcelona',  'London', 'Madrid', 'Paris', 'Berlin', 'Lissabon']

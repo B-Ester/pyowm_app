@@ -4,7 +4,6 @@ from .weather_api import clock, cords, forecast as fcs, tomorrow_forecast as tf
 from .weather_api import forecast_sun as tfs, forecast_c as fc, forecast_fog as fg
 from .weather_api import forecast_h as fh,forecast_t  as ft, weather_at_coords as wac
 from .forms import City, Cords
-#import ipdb
 
 def index(request):
     return render(request, 'application_pyowm/index.html', {'time': clock()})
@@ -19,7 +18,8 @@ def city_forecast(request):
                 'city': city_name,
                 'cords_lon': cords(city_name).get_lon(),
                 'cords_lat': cords(city_name).get_lat(),
-                'time': clock()
+                'time': clock(),
+                'location': all_locations
             }
             return render(request, 'application_pyowm/any_city.html', context)
         else:
@@ -33,16 +33,8 @@ def city_forecast(request):
         return render(request, 'application_pyowm/any_city.html', context)
     return HttpResponseRedirect("/city_forecast/")
 
-def barca(request):
-    return render(request, 'application_pyowm/barca.html', {'data': ws(all_locations[5])})
-
-def sever(request):
-    return render(request, 'application_pyowm/sever.html', {'data': ws(all_locations[0])})
-
-city1 = 'Severodonetsk'
 def forecast(request, city):
     return render(request, 'application_pyowm/any_city.html', {'data': ws(city)})
-
 
 def future_fc(request):
     if request.method == 'POST':
@@ -66,6 +58,7 @@ def future_fc(request):
                 'fs': fs(city_name),
                 'fh': fh(city_name),
                 'ft': ft(city_name),
+                'city': city_name
                         }
             return render(request, 'application_pyowm/future_fc.html', context)
         else:
@@ -94,7 +87,9 @@ def coords(request):
                 'press': res.get_pressure(),
                 'sr': res.get_sunrise_time(timeformat='iso')[11:19],
                 'sn': res.get_sunset_time(timeformat='iso')[11:19],
-                'time': clock()
+                'time': clock(),
+                'long': long,
+                'lat': lat
             }
             return render(request, 'application_pyowm/coords.html', context)
         else:

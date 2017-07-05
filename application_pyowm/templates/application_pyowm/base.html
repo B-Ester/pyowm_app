@@ -2,7 +2,6 @@
 {% load staticfiles %}
 <html lang="en">
 <head>
-    {% block title %}
     <meta charset="UTF-8">
     <title>Weather right now !</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,9 +11,7 @@
     <link href=" {% static "application_pyowm/custom.min.css"%}>">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js "></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
-
     <script>
-
      var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-23019901-1']);
       _gaq.push(['_setDomainName', "bootswatch.com"]);
@@ -26,10 +23,8 @@
        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
      })();
-
     </script>
 </head>
-
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -46,9 +41,9 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">В Украине <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="/sever/">Северодонецк</a></li>
+              <li><a href="{% url 'forecast' 'Severodonetsk' %}">Северодонецк</a></li>
                 <li class="divider"></li>
-                <li><a href="../">Киев</a></li>
+                <li><a href="{% url 'forecast' city='Kiev' %}">Киев</a></li>
                 <li><a href="../">Харьков</a></li>
                 <li><a href="../">Днепр</a></li>
                 <li><a href="../">Львов</a></li>
@@ -68,43 +63,38 @@
               </ul>
             </li>
             <li>
+              <a href="future_fc/">На завтра </a>
+            </li>
+            <li>
+              <a href="coords/">В координатах </a>
+            </li>
+            <li>
               <a href="https://pypi.python.org/pypi/pyowm/2.0.0">О модуле</a>
             </li>
             <li>
               <a href="https://openweathermap.org">О сайте пронозов</a>
             </li>
           </ul>
-
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/form_test" target="_blank">Built With Bootstrap</a></li>
+            <li><a href="/" target="_blank">На главную</a></li>
           </ul>
-
         </div>
       </div>
     </div>
+{% block greeting_text %}{% endblock greeting_text %}
+{% block form_c %}{% endblock form_c %}
+{% block any_city %}{% endblock any_city %}
+{% block form_coords %}{% endblock form_coords %}
+{% block result_coords %}{% endblock result_coords %}
+{% block tommorow %}{% endblock tommorow %}
 <div>
     {% if time.minute < 10 %}
-        <h4 class="date">{{ time.hour }} : 0{{ time.minute }} </br></h4>
+        <h4 class="date">{{ time.hour }} : 0{{ time.minute }}<br>
+        {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
     {% else %}
-    <h4 class="date">{{ time.hour }} : {{ time.minute }} </br></h4>
+    <h4 class="date">{{ time.hour }} : {{ time.minute }}<br>
+        {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
     {% endif %}
-{{ time.day }}-{{ time.month }}-{{ time.year}}
 </div>
-    {% endblock %}
-<div class="result">
-       <hr>Погода в городе {{ city }} сейчас: <br>
-            {{type}}
-       <hr>
-       Статус: {{data.status}}<br>
-       Температура сейчас : {{data.temperature_celsius.temp_max }} °C<br>
-       Ветер : {{data.wind.speed}} м/с<br>
-       Давление : {{data.pressure.press}}<br>
-       Облачность : {{data.status}}<br>
-       Влажность : {{data.humidity}} %<br>
-       Детальный статус : {{data.detailed_status}} <br>
-       Время рассвета : {{data.sunrise_time}} <br>
-       Время заката : {{data.sunset_time }} <br>
-</div>
-
 </body>
 </html>
