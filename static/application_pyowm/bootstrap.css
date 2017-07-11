@@ -6976,7 +6976,7 @@ a.list-group-item-danger.active:focus {
   color: snow;
 }
 .date:hover {
-  color: black;
+  color: yellow;
 }
 .greeting:hover {
   opacity: 0.6;
@@ -6988,7 +6988,7 @@ a.list-group-item-danger.active:focus {
   color: snow;
 }
 .date_c:hover {
-  color: #f05800}
+  color: yellow}
 
 .result:hover {
   margin-top: 50px;
@@ -7046,7 +7046,7 @@ a.list-group-item-danger.active:focus {
   color: snow;
 }
 .date_cm:hover {
-  color: #f05800}
+  color: yellow}
 
 .form_c {
   margin-left: 25px;

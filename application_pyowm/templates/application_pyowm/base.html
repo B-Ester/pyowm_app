@@ -41,32 +41,32 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">В Украине <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="{% url 'forecast' 'Severodonetsk' %}">Северодонецк</a></li>
+              <li><a href="../sever" >Северодонецк</a></li>
                 <li class="divider"></li>
-                <li><a href="{% url 'forecast' city='Kiev' %}">Киев</a></li>
-                <li><a href="../">Харьков</a></li>
-                <li><a href="../">Днепр</a></li>
-                <li><a href="../">Львов</a></li>
-                <li><a href="../">Одесса</a></li>
+                <li><a href="../kiev">Киев</a></li>
+                <li><a href="../kharkov">Харьков</a></li>
+                <li><a href="../dnepr">Днепр</a></li>
+                <li><a href="../lvov">Львов</a></li>
+                <li><a href="../odessa">Одесса</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">В Европе <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="/barca/">Барселона</a></li>
+                <li><a href="../barca">Барселона</a></li>
                 <li class="divider"></li>
-                <li><a href="../">Лондон</a></li>
-                <li><a href="../">Мадрид</a></li>
-                <li><a href="../">Париж</a></li>
-                <li><a href="../">Берлин</a></li>
-                <li><a href="../">Лиссабон</a></li>
+                <li><a href="../london">Лондон</a></li>
+                <li><a href="../madrid">Мадрид</a></li>
+                <li><a href="../paris">Париж</a></li>
+                <li><a href="../berlin">Берлин</a></li>
+                <li><a href="../lissabon">Лиссабон</a></li>
               </ul>
             </li>
             <li>
-              <a href="future_fc/">На завтра </a>
+              <a href="../future_fc/">На завтра </a>
             </li>
             <li>
-              <a href="coords/">В координатах </a>
+              <a href="../coords/">В координатах </a>
             </li>
             <li>
               <a href="https://pypi.python.org/pypi/pyowm/2.0.0">О модуле</a>
@@ -76,7 +76,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/" target="_blank">На главную</a></li>
+            <li><a href="../" target="_blank">На главную</a></li>
           </ul>
         </div>
       </div>
@@ -87,6 +87,7 @@
 {% block form_coords %}{% endblock form_coords %}
 {% block result_coords %}{% endblock result_coords %}
 {% block tommorow %}{% endblock tommorow %}
+{% block seepka %}{% endblock seepka %}
 <div>
     {% if time.minute < 10 %}
         <h4 class="date">{{ time.hour }} : 0{{ time.minute }}<br>
@@ -96,5 +97,6 @@
         {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
     {% endif %}
 </div>
+
 </body>
 </html>

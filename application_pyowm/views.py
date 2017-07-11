@@ -2,11 +2,15 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from .weather_api import weather_at_any_city as ws, all_locations, forecast_snow as fs
 from .weather_api import clock, cords, forecast as fcs, tomorrow_forecast as tf
 from .weather_api import forecast_sun as tfs, forecast_c as fc, forecast_fog as fg
-from .weather_api import forecast_h as fh,forecast_t  as ft, weather_at_coords as wac
+from .weather_api import forecast_h as fh,forecast_t as ft, weather_at_coords as wac
 from .forms import City, Cords
 
 def index(request):
-    return render(request, 'application_pyowm/index.html', {'time': clock()})
+    context = {
+        'time': clock(),
+        'loc': all_locations
+     }
+    return render(request, 'application_pyowm/index.html', context)
 
 def city_forecast(request):
     if request.method == 'POST':
@@ -33,8 +37,24 @@ def city_forecast(request):
         return render(request, 'application_pyowm/any_city.html', context)
     return HttpResponseRedirect("/city_forecast/")
 
+def city_from_loc(request):
+    context = {
+        'data': ws(),
+        'city': all_locations,
+        'cords_lon': cords().get_lon(),
+        'cords_lat': cords().get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', all_locations, context)
+
+
 def forecast(request, city):
-    return render(request, 'application_pyowm/any_city.html', {'data': ws(city)})
+    context = {
+        'loc': all_locations,
+        'data': ws(str(city))
+    }
+    return render(request, 'application_pyowm/any_city.html', context, city)
 
 def future_fc(request):
     if request.method == 'POST':
@@ -102,6 +122,153 @@ def coords(request):
         }
         return render(request, 'application_pyowm/coords.html', context)
     return HttpResponseRedirect("/coords/")
+
+def sever(request):
+    city_name ='Severodonetsk'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def kiev(request):
+    city_name ='Kiev'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def kharkov(request):
+    city_name ='Kharkov'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def lvov(request):
+    city_name ='Lvov'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def dnepr(request):
+    city_name ='Dnerpopetrovsk'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def odessa(request):
+    city_name ='Odessa'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def barca(request):
+    city_name ='Barcelona'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def london(request):
+    city_name ='London'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def paris(request):
+    city_name ='Paris'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def madrid(request):
+    city_name ='Madrid'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def berlin(request):
+    city_name ='Berlin'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+def lissabon(request):
+    city_name ='Lissabon'
+    context = {
+        'data': ws(city_name),
+        'city': city_name,
+        'cords_lon': cords(city_name).get_lon(),
+        'cords_lat': cords(city_name).get_lat(),
+        'time': clock(),
+        'location': all_locations
+    }
+    return render(request, 'application_pyowm/any_city.html', context)
+
+
+
 
 
 

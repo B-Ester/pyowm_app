@@ -69,3 +69,4 @@ def forecast_t(located):
 def weather_at_coords(long, lat):
     obs = owm.weather_at_coords(long, lat)
     return obs
+
