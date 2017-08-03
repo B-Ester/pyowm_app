@@ -1,14 +1,14 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from .weather_api import weather_at_any_city as ws, all_locations, forecast_snow as fs
-from .weather_api import clock, cords, forecast as fcs, tomorrow_forecast as tf
+from .weather_api import cords, tomorrow_forecast as tf
 from .weather_api import forecast_sun as tfs, forecast_c as fc, forecast_fog as fg
-from .weather_api import forecast_h as fh,forecast_t as ft, weather_at_coords as wac
+from .weather_api import forecast_h as fh, forecast_t as ft, weather_at_coords as wac
 from .forms import City, Cords
+from .weather_api import timezone_detec as tzdt, time_in_tz_now as titn
 
 def index(request):
     context = {
-        'time': clock(),
-        'loc': all_locations
+        'loc': all_locations,
      }
     return render(request, 'application_pyowm/index.html', context)
 
@@ -22,8 +22,9 @@ def city_forecast(request):
                 'city': city_name,
                 'cords_lon': cords(city_name).get_lon(),
                 'cords_lat': cords(city_name).get_lat(),
-                'time': clock(),
-                'location': all_locations
+                'location': all_locations,
+                'tz': tzdt(city_name),
+                'titin': titn(tzdt(city_name))[10:19],
             }
             return render(request, 'application_pyowm/any_city.html', context)
         else:
@@ -32,7 +33,6 @@ def city_forecast(request):
         form = City()
         context = {
             'form': form,
-            'time': clock()
         }
         return render(request, 'application_pyowm/any_city.html', context)
     return HttpResponseRedirect("/city_forecast/")
@@ -43,7 +43,6 @@ def city_from_loc(request):
         'city': all_locations,
         'cords_lon': cords().get_lon(),
         'cords_lat': cords().get_lat(),
-        'time': clock(),
         'location': all_locations
     }
     return render(request, 'application_pyowm/any_city.html', all_locations, context)
@@ -62,15 +61,8 @@ def future_fc(request):
         if form.is_valid():
             city_name = (str(form.cleaned_data['name_of_city']))
             context = {
-                'fcst': fcs(city_name),
-                'rain': fcs(city_name).will_have_rain(),
-                'sun': fcs(city_name).will_have_sun(),
-                'snow': fcs(city_name).will_have_snow(),
-                'clouds': fcs(city_name).will_have_clouds(),
-                'ws': fcs(city_name).most_cold(),
                 'cords_lon': cords(city_name).get_lon(),
                 'cords_lat': cords(city_name).get_lat(),
-                'time': clock(),
                 'tom': tf(city_name),
                 'tfs': tfs(city_name),
                 'fc': fc(city_name),
@@ -87,7 +79,6 @@ def future_fc(request):
         form = City()
         context = {
             'form': form,
-            'time': clock()
                     }
     return render(request, 'application_pyowm/future_fc.html', context)
     return HttpResponseRedirect("/future_fc/")
@@ -107,18 +98,16 @@ def coords(request):
                 'press': res.get_pressure(),
                 'sr': res.get_sunrise_time(timeformat='iso')[11:19],
                 'sn': res.get_sunset_time(timeformat='iso')[11:19],
-                'time': clock(),
                 'long': long,
                 'lat': lat
             }
             return render(request, 'application_pyowm/coords.html', context)
         else:
-            return HttpResponse('Введите корректные значения координат')
+            return HttpResponse('Введите корректные значения координат (0-90)')
     else:
         form_c = Cords
         context = {
             'form': form_c,
-            'time': clock()
         }
         return render(request, 'application_pyowm/coords.html', context)
     return HttpResponseRedirect("/coords/")
@@ -130,8 +119,9 @@ def sever(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -142,8 +132,9 @@ def kiev(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -154,8 +145,9 @@ def kharkov(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -166,8 +158,9 @@ def lvov(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -178,8 +171,9 @@ def dnepr(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -190,8 +184,9 @@ def odessa(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -202,8 +197,9 @@ def barca(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -214,8 +210,9 @@ def london(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -226,8 +223,9 @@ def paris(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -238,8 +236,9 @@ def madrid(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -250,8 +249,9 @@ def berlin(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
 
@@ -262,12 +262,11 @@ def lissabon(request):
         'city': city_name,
         'cords_lon': cords(city_name).get_lon(),
         'cords_lat': cords(city_name).get_lat(),
-        'time': clock(),
-        'location': all_locations
+        'location': all_locations,
+        'tz': tzdt(city_name),
+        'titin': titn(tzdt(city_name))[10:19],
     }
     return render(request, 'application_pyowm/any_city.html', context)
-
-
 
 
 

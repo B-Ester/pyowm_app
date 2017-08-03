@@ -1,4 +1,7 @@
 import pyowm, json, datetime
+from pytz import timezone
+from geopy import geocoders
+
 owm = pyowm.OWM('aa16d2e6e3a3c13b30140edfb4a81b9c', language='ru')
 
 all_locations = ['Severodonetsk', 'Kiev', 'Kharkov', 'Lvov', 'Odessa', 'Barcelona',  'London', 'Madrid', 'Paris', 'Berlin', 'Lissabon']
@@ -14,6 +17,12 @@ def weather_at_any_city(located):
     data['sunset_time'] = w.get_sunset_time(timeformat='iso')[11:19]
     return data
 
+def timezone_detec(city):
+    g = geocoders.GoogleV3()
+    place, (lat, lng) = g.geocode(str(city))
+    timezone = g.timezone((lat, lng))
+    return timezone.zone
+
 def clock():
     tcp = datetime.datetime.now()
     return tcp
@@ -26,6 +35,21 @@ def cords(located):
 def forecast(located):
     fc = owm.daily_forecast(located, limit=2)
     return fc
+
+def time_in_tz_now(city):
+    home = timezone('Europe/Kiev')
+    fmt = '%d-%m-%Y %H:%M:%S %Z%z'
+    any_else = timezone(city)
+    dn = datetime.datetime.now()
+    year = dn.year
+    month = dn.month
+    day = dn.day
+    hour = dn.hour
+    min = dn.minute
+    sec = dn.second
+    loc_dt = home.localize(datetime.datetime(year, month, day, hour, min, sec))
+    ams_dt = loc_dt.astimezone(any_else)
+    return ams_dt.strftime(fmt)
 
 time_tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
 hours = datetime.datetime.today().hour

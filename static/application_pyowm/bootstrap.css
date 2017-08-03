@@ -6943,7 +6943,7 @@ a.list-group-item-danger.active:focus {
   border-color: #020202;
 }
 .result {
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 50px;
   font-weight:bold;
   font-variant:small-caps;
@@ -6971,7 +6971,7 @@ a.list-group-item-danger.active:focus {
   text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white;
 }
 .date {
-  padding-left: 1170px;
+  padding-left: 1070px;
   font-family:"tahoma";
   color: snow;
 }
@@ -6990,16 +6990,6 @@ a.list-group-item-danger.active:focus {
 .date_c:hover {
   color: yellow}
 
-.result:hover {
-  margin-top: 50px;
-  margin-left: 50px;
-  font-weight:bold;
-  font-variant:small-caps;
-  color: #422e01;
-  font-size:130%;
-  font-style:oblique;
-  text-shadow: 0.4px 0.4px 0.4px white, 0 0 0.4em white;
-}
 .futurefc {
   margin-top: 100px;
 }
@@ -7052,3 +7042,126 @@ a.list-group-item-danger.active:focus {
   margin-left: 25px;
   margin-top: 75px;
 }
+
+#act {
+  width: 350px;
+  height: 15px;
+}
+
+.time_now {
+  margin-top: 300px;
+  margin-left: 1025px;
+}
+.vcontainer {
+  margin-top: 150px;
+  margin-left: 50px;
+  color: #ffffff;
+  background-color: #161616;
+  border-color: #020202;
+}
+.result {
+  margin-top: 20px;
+  margin-left: 50px;
+  font-weight:bold;
+  font-variant:small-caps;
+  color: black;
+  font-size:130%;
+  font-style:oblique;
+  text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white;
+}
+#forma {
+  margin-top: 70px;
+  margin-left: 50px;
+}
+#redir {
+  font-weight:bold;
+}
+
+.greeting {
+  margin-left: 900px;
+  margin-top: 105px;
+  font-weight:bold;
+  font-style:italic;
+  font-size:140%;
+  font-family:"Times New Roman",Georgia,Serif;
+  color:#ffae11;
+  text-shadow: 0.3px 0.3px 0.3px white, 0 0 0.3em white;
+}
+.date {
+  padding-left: 1070px;
+  font-family:"tahoma";
+  color: snow;
+}
+.date:hover {
+  color: yellow;
+}
+.greeting:hover {
+  opacity: 0.6;
+  color: snow;
+}
+.date_c {
+  padding-left: 1170px;
+  font-family:"tahoma";
+  color: snow;
+}
+.date_c:hover {
+  color: yellow}
+
+.futurefc {
+  margin-top: 100px;
+}
+.tforecast {
+  color: #030303;
+  font-style: oblique ;
+  font-family:"Times New Roman",Georgia,Serif;
+  font-size:130%;
+  line-height: 25px;
+  font-weight:bold;
+}
+#sun {
+  position: absolute ;
+  margin-left: 50px;
+}
+#rain {
+  position: absolute ;
+  margin-left: 350px;
+}
+#clouds {
+  position: absolute ;
+  margin-left: 500px;
+}
+#fog {
+  position: absolute ;
+  margin-left:650px;
+}
+#snow {
+  position: absolute;
+  margin-left:200px;
+}
+#hurry {
+  position: absolute;
+  margin-left:800px;
+}
+#tor {
+  position: absolute;
+  margin-left:950px;
+}
+.date_cm {
+  position: absolute;
+  padding-left: 1170px;
+  font-family:"tahoma";
+  color: snow;
+}
+.date_cm:hover {
+  color: yellow}
+
+.form_c {
+  margin-left: 25px;
+  margin-top: 75px;
+}
+
+#act {
+  width: 400px;
+  height: 15px;
+}
+

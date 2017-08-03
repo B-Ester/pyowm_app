@@ -11,13 +11,13 @@
     <link href=" {% static "application_pyowm/custom.min.css"%}>">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js "></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
+    <link href=" {% static "application_pyowm/appl_pyowm.css" %}" rel="stylesheet">
     <script>
      var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-23019901-1']);
       _gaq.push(['_setDomainName', "bootswatch.com"]);
         _gaq.push(['_setAllowLinker', true]);
       _gaq.push(['_trackPageview']);
-
      (function() {
        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -36,12 +36,12 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
+        <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">В Украине <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-              <li><a href="../sever" >Северодонецк</a></li>
+              <li><a href="../sever">Северодонецк</a></li>
                 <li class="divider"></li>
                 <li><a href="../kiev">Киев</a></li>
                 <li><a href="../kharkov">Харьков</a></li>
@@ -68,6 +68,7 @@
             <li>
               <a href="../coords/">В координатах </a>
             </li>
+
             <li>
               <a href="https://pypi.python.org/pypi/pyowm/2.0.0">О модуле</a>
             </li>
@@ -78,9 +79,35 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../" target="_blank">На главную</a></li>
           </ul>
+<!-- /Часы -->
+<ul class="nav navbar-nav navbar-right">
+<li class="btn btn-default navbar-btn hours"></li>
+<li class="btn btn-default navbar-btn min"></li>
+<li class="btn btn-default navbar-btn sec"></li>
+</ul>
+<!-- /Часы -->
+        </div>
+<script>
+$(document).ready(function() {
+setInterval( function() {
+var hours = new Date().getHours();
+$(".hours").html(( hours < 10 ? "0" : "" ) + hours);
+}, 1000);
+setInterval( function() {
+var minutes = new Date().getMinutes();
+$(".min").html(( minutes < 10 ? "0" : "" ) + minutes);
+},1000);
+setInterval( function() {
+var seconds = new Date().getSeconds();
+$(".sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+},1000);
+});
+</script>
+
         </div>
       </div>
     </div>
+</body>
 {% block greeting_text %}{% endblock greeting_text %}
 {% block form_c %}{% endblock form_c %}
 {% block any_city %}{% endblock any_city %}
@@ -88,15 +115,6 @@
 {% block result_coords %}{% endblock result_coords %}
 {% block tommorow %}{% endblock tommorow %}
 {% block seepka %}{% endblock seepka %}
-<div>
-    {% if time.minute < 10 %}
-        <h4 class="date">{{ time.hour }} : 0{{ time.minute }}<br>
-        {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
-    {% else %}
-    <h4 class="date">{{ time.hour }} : {{ time.minute }}<br>
-        {{ time.day }}-{{ time.month }}-{{ time.year}}</h4>
-    {% endif %}
-</div>
 
 </body>
 </html>

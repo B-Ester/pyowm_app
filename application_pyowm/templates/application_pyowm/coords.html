@@ -1,26 +1,45 @@
 {% extends 'application_pyowm/base.html' %}
 {% block form_coords %}
+{% if lat == None %}
 <form method="post" action="/coords/" class="btn btn-default navbar-btn" id="forma">
     {% csrf_token %}
     {{ form.long }}
     {{ form.lat }}
 <input type="submit" value="GO" />
 </form>
+{% else %}
+
+<div class="container-fluid" id="result_c">
+        <div class="col-lg-6 col-md-6 col-sm-4 ">
+       Погода в координатах {{ long }} - {{ lat }} сейчас :
+       <table class="table" id="act">
+          <tbody>
+       <tr class="active">
+       <td id="act_c">Статус: </td>
+       <td> {{status}}</td></tr>
+       <tr class="success">
+       <td id="act_c">Температура :  </td>
+       <td> {{ temp.temp_max }} °C</td></tr>
+       <tr class="info">
+       <td id="act_c">Влажность : </td>
+       <td> {{ humidity }} %</td></tr>
+       <tr class="warning">
+       <td id="act_c">Ветер : </td>
+       <td> {{wind.speed }} м/с </td></tr>
+       <tr class="danger">
+       <td id="act_c">Давление :  </td>
+       <td> {{press.press}}</td></tr>
+       <tr class="active">
+       <td id="act_c">Время рассвета : </td>
+       <td> {{sr}}</td></tr><br>
+       <tr class="success">
+       <td id="act_c">Время заката : </td>
+       <td>{{sn}}</td></tr><br>
+            </tbody>
+        </table>
+</div>
 <form action="/coords/">
     <button class="btn btn-default navbar-btn" id="redir" type="submit">Другие координаты </button>
 </form>
+{% endif %}
 {% endblock form_coords %}
-{% block result_coords %}
-<div class="result">
-       <hr>Погода в координатах {{ long }} - {{ lat }} сейчас : <br>
-            {{type}}
-       <hr>
-       Статус: {{status}}<br>
-       Температура : {{ temp.temp_max }} °C<br>
-       Влажность : {{ humidity }} %<br>
-       Ветер : {{wind.speed }} м/с<br>
-       Давление : {{press.press}}<br>
-       Время рассвета : {{sr}}<br>
-       Время заката : {{sn}}<br>
-</div>
-{% endblock result_coords %}

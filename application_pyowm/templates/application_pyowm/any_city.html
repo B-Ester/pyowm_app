@@ -1,30 +1,79 @@
 {% extends "application_pyowm/base.html" %}
 {% block form_c %}
+{% if city == None %}
     <form action="/city_forecast/" class="btn btn-default navbar-btn" id="forma" method="post">
     {% csrf_token %}
     {{ form }}
     <label for="Введите город ">Поиск </label>
     <input type="submit" value="Submit" name="Введите город: " maxlength="50"/>
     </form>
-    <form action="/city_forecast/">
-    <button class="btn btn-default navbar-btn" id="redir" type="submit">Другой город </button>
-    </form>
+{% else %}
+<div class="container-fluid" id="result">
+        <div class="col-lg-6 col-md-6 col-sm-4 ">
+            Погода в городе {{ city }} сейчас:<br>
+                <table class="table" id="act">
+                    <tbody>
+                        <tr class="active">
+                        <td id="act">Статус: </td>
+                        <td>{{data.status}}</td>
+                        </tr>
+                        <tr class="success">
+                        <td>Температура сейчас:</td>
+                        <td> {{data.temperature_celsius.temp_max }} °C</td>
+                        </tr>
+                        <tr class="info">
+                        <td>Ветер: </td>
+                        <td>{{data.wind.speed}} м/с</td>
+                        </tr>
+                        <tr class="warning">
+                        <td>Давление: </td>
+                        <td>{{data.pressure.press}}</td>
+                        </tr>
+                        <tr class="danger">
+                        <td>Облачность: </td>
+                        <td> {{data.status}}</td>
+                        </tr>
+                        <tr class="active">
+                        <td>Влажность: </td>
+                        <td> {{data.humidity}} %</td>
+                        </tr>
+                        <tr class="success">
+                        <td>Детальный статус: </td>
+                        <td>{{data.detailed_status}}</td>
+                        </tr>
+                        <tr class="info">
+                        <td>Время рассвета:</td>
+                        <td>{{data.sunrise_time}} </td>
+                        </tr>
+                        <tr class="warning">
+                        <td>Время заката: </td>
+                        <td>{{data.sunset_time }}  </td>
+                        </tr>
+                        <tr class="danger">
+                        <td>Широта:</td>
+                        <td> {{ cords_lon }} </td>
+                        </tr>
+                        <tr class="active">
+                        <td>Долгота:</td>
+                        <td> {{ cords_lat}} </td>
+                        </tr>
+                        <tr class="success">
+                        <td>Часовой пояс:</td>
+                        <td> {{ tz }} </td>
+                        </tr>
+                        <tr class="info">
+                        <td>Время</td>
+                        <td> {{ titin }} </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        <div class="col-lg-4">
+        <form action="/city_forecast/">
+        <button class="btn-lg" id="redir" type="submit">Другой город </button>
+        </form>
+        </div>
+</div>
+
+{% endif %}
 {% endblock form_c %}
-    {% block any_city %}
-       <div class="result">
-       <hr>Погода в городе {{ city }} сейчас: <br>
-            {{type}}
-       <hr>
-       Статус: {{data.status}}<br>
-       Температура сейчас : {{data.temperature_celsius.temp_max }} °C<br>
-       Ветер : {{data.wind.speed}} м/с<br>
-       Давление : {{data.pressure.press}}<br>
-       Облачность : {{data.status}}<br>
-       Влажность : {{data.humidity}} %<br>
-       Детальный статус : {{data.detailed_status}} <br>
-       Время рассвета : {{data.sunrise_time}} <br>
-       Время заката : {{data.sunset_time }} <br>
-       Широта : {{ cords_lon }} <br>
-       Долгота : {{ cords_lat }} <br>
-       </div>
-{% endblock any_city %}

@@ -1,217 +1,187 @@
 {% extends 'application_pyowm/base.html' %}
 {% block any_city %}
-{% if city_name is not None %}
-<form action="/future_fc/">
-    <button class="btn btn-default navbar-btn" id="redir" type="submit">Другой город </button>
-</form>
-{% elif city_name == None %}
-<form action="/future_fc/" class="btn btn-default navbar-btn" id="forma" method="post">
+{% if city == None %}
+    <form action="/future_fc/" class="btn btn-default navbar-btn" id="forma" method="post">
     {% csrf_token %}
     {{ form }}
     <label for="Введите город ">Поиск </label>
     <input type="submit" value="Submit" name="Введите город: " maxlength="50"/>
-</form>
-{% endif %}
+    </form>
+{% else %}
+
+<div class="container-fluid">
+<div id="table_ff"></div>
+<table class="table" id="table_ff">
+    <thead >
+       <tr id="result_table">
+                <th>Время</th>
+                <th>Солнце</th>
+                <th>Дождь</th>
+                <th>Снег</th>
+                <th>Облачность</th>
+                <th>Туман</th>
+                <th>Ураган</th>
+                <th>Торнадо</th>
+            </tr>
+        </thead>
+        <tbody id="tables_text">
+            <tr class="success">
+                <td>07:00</td>
+                <td>{% if tfs.0 == True %}
+                                Да
+                    {% elif tfs.0 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if tom.0 == True %}
+                                Да
+                    {% elif tom.0 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fs.0 == True %}
+                                Да
+                    {% elif fs.0 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fc.0 == True %}
+                                Да<br>
+                    {% elif fc.0 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fg.0 == True %}
+                                Да
+                    {% elif fg.0 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fh.0 == True %}
+                                Да
+                    {% elif fh.0 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if ft.0 == True %}
+                                Да
+                    {% elif ft.0 == False %}
+                                Нет
+                    {% endif %}</td>
+            </tr>
+            <tr class="danger">
+                <td>12:00</td>
+                <td>{% if tfs.1 == True %}
+                                Да
+                    {% elif tfs.1 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if tom.1 == True %}
+                                Да
+                    {% elif tom.1 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fs.1 == True %}
+                                Да
+                    {% elif fs.1 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fc.1 == True %}
+                                Да
+                    {% elif fc.1 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fg.1 == True %}
+                                Да
+                    {% elif fg.1 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fh.1 == True %}
+                                Да
+                    {% elif fh.1 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if ft.1 == True %}
+                                Да
+                    {% elif ft.1 == False %}
+                                Нет
+                    {% endif %}</td>
+            </tr>
+            <tr class="info">
+                <td>16:00</td>
+                <td>{% if tfs.2 == True %}
+                                Да
+                    {% elif tfs.2 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if tom.2 == True %}
+                                Да
+                    {% elif tom.2 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fs.2 == True %}
+                                Да
+                    {% elif fs.2 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fc.2 == True %}
+                                Да
+                    {% elif fc.2 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fg.2 == True %}
+                                Да
+                    {% elif fg.2 == False %}
+                                Нет
+                    {% endif %}</td>
+                 <td>{% if fh.2 == True %}
+                                Да
+                    {% elif fh.2 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if ft.2 == True %}
+                                Да
+                    {% elif ft.2 == False %}
+                                Нет
+                    {% endif %}</td>
+            </tr>
+            <tr class="warning">
+                <td>21:00</td>
+                <td>{% if tfs.3 == True %}
+                                Да
+                    {% elif tfs.3 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if tom.3 == True %}
+                                Да
+                    {% elif tom.3 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fs.3 == True %}
+                                Да
+                    {% elif fs.3 == False %}
+                                Нет<br>
+                    {% endif %}</td>
+                <td>{% if fc.3 == True %}
+                                Да
+                    {% elif fc.3 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fg.3 == True %}
+                                Да
+                    {% elif fg.3 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if fh.3 == True %}
+                                Да
+                    {% elif fh.3 == False %}
+                                Нет
+                    {% endif %}</td>
+                <td>{% if ft.3 == True %}
+                                Да
+                    {% elif ft.3 == False %}
+                                Нет
+                    {% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
 <form action="/future_fc/">
     <button class="btn btn-default navbar-btn" id="redir" type="submit">Другой город </button>
 </form>
+</div>
+{% endif %}
 {% endblock any_city %}
-{% block tommorow %}
-<div class="result">
-       <hr>Погода в городе {{ city }} завтра: <br>
-            {{type}}
-       <hr>
-       {% if rain == True %}
-           Будет дождь : Да<br>
-       {% elif rain == False %}
-           Будет дождь : Нет<br>
-       {% else %}
-       Будет дождь :  <br>
-       {% endif %}
-       {% if sun == True %}
-           Будет солнечно : Да<br>
-       {% elif sun == False %}
-           Будет солнечно : Нет<br>
-       {% else %}
-       Будет солнечно : <br>
-       {% endif %}
-       {% if snow == True %}
-           Будет снег : Да<br>
-       {% elif snow == False %}
-           Будет снег : Нет<br>
-       {% else %}
-       Будет снег : <br>
-       {% endif %}
-       {% if clouds == True %}
-           Будет облачно : Да<br>
-       {% elif clouds == False %}
-           Будет облачно : Нет<br>
-       {% else %}
-       Будет облачно :  <br>
-       {% endif %}
-       Широта : {{ cords_lon }} <br>
-       Долгота : {{ cords_lat }} <br>
-</div>
-<div class="tforecast" id="rain">
-       Дождь :<br>
-       {% if tom.0 == True %}
-           7:00 : Да<br>
-       {% elif tom.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if tom.1 == True %}
-           12:00 : Да<br>
-       {% elif tom.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if tom.2 == True %}
-           16:00 : Да<br>
-       {% elif tom.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if tom.3 == True %}
-           21:00 : Да<br>
-       {% elif tom.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div>
-<div class="tforecast" id="sun">
-       Солнце:<br>
-       {% if tfs.0 == True %}
-           7:00 : Да<br>
-       {% elif tfs.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if tfs.1 == True %}
-           12:00 : Да<br>
-       {% elif tfs.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if tfs.2 == True %}
-           16:00 : Да<br>
-       {% elif tfs.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if tfs.3 == True %}
-           21:00 : Да<br>
-       {% elif tfs.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div>
-
-<div class="tforecast" id="fog">
-       Туман:<br>
-       {% if fg.0 == True %}
-           7:00 : Да<br>
-       {% elif fg.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if fg.1 == True %}
-           12:00 : Да<br>
-       {% elif fg.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if fg.2 == True %}
-           16:00 : Да<br>
-       {% elif fg.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if fg.3 == True %}
-           21:00 : Да<br>
-       {% elif fg.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div>
-<div class="tforecast" id="clouds">
-       Облачность:<br>
-       {% if fc.0 == True %}
-           7:00 : Да<br>
-       {% elif fc.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if fc.1 == True %}
-           12:00 : Да<br>
-       {% elif fc.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if fc.2 == True %}
-           16:00 : Да<br>
-       {% elif fc.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if fc.3 == True %}
-           21:00 : Да<br>
-       {% elif fc.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div>
-<div class="tforecast" id="snow">
-       Cнег:<br>
-       {% if fs.0 == True %}
-           7:00 : Да<br>
-       {% elif fs.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if fs.1 == True %}
-           12:00 : Да<br>
-       {% elif fs.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if fs.2 == True %}
-           16:00 : Да<br>
-       {% elif fs.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if fs.3 == True %}
-           21:00 : Да<br>
-       {% elif fs.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div>
-<div class="tforecast" id="hurry">
-       Ураган:<br>
-       {% if fh.0 == True %}
-           7:00 : Да<br>
-       {% elif fh.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if fh.1 == True %}
-           12:00 : Да<br>
-       {% elif fh.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if fh.2 == True %}
-           16:00 : Да<br>
-       {% elif fh.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if fh.3 == True %}
-           21:00 : Да<br>
-       {% elif fh.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div>
-<div class="tforecast" id="tor">
-       Торнадо:<br>
-       {% if ft.0 == True %}
-           7:00 : Да<br>
-       {% elif ft.0 == False %}
-           7:00 : Нет<br>
-       {% endif %}
-       {% if ft.1 == True %}
-           12:00 : Да<br>
-       {% elif ft.1 == False %}
-           12:00 : Нет<br>
-       {% endif %}
-       {% if ft.2 == True %}
-           16:00 : Да<br>
-       {% elif ft.2 == False %}
-           16:00 : Нет<br>
-       {% endif %}
-       {% if ft.3 == True %}
-           21:00 : Да<br>
-       {% elif ft.3 == False %}
-           21:00 : Нет<br>
-       {% endif %}
-</div >
-{% endblock tommorow %}
